@@ -10,7 +10,6 @@ def show_id3_tags(file_path):
     print(tags.pprint())
 
 def rename(srcName):
-    #os.chdir(targetPath)
     #testfile = open(targetPath + "JUNK伊集院光・深夜の馬鹿力2018年03月19日.mp3")
     #content = testfile.readlines()
     #content = testfile.read()
