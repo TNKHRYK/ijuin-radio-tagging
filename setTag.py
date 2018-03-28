@@ -1,17 +1,31 @@
 # -*- coding: utf-8 -*-
 import sys
 import os
-# from mutagen.easyid3 import EasyID3
-import mutagen
+from mutagen.easyid3 import EasyID3
+import time
 
 
 def show_id3_tags(file_path):
-    tags = mutagen.id3(file_path)
+    tags = EasyID3(file_path)
     print(tags.pprint())
 
-os.chdir('../../music/Radio/伊集院光/深夜の馬鹿力/本放送/深夜の馬鹿力 2018年/')
-testfile = 'JUNK伊集院光・深夜の馬鹿力2018年01月01日.mp3'
-#tags = mutagen.easyid3(testfile)
-#print(tags['title'])
+def rename(srcName):
+    #os.chdir(targetPath)
+    #testfile = open(targetPath + "JUNK伊集院光・深夜の馬鹿力2018年03月19日.mp3")
+    #content = testfile.readlines()
+    #content = testfile.read()
+    time_str = time.strftime('%Y%m%d%H%M%S')
+    print(time_str)
+    dstName = srcName.replace('26',time_str)
+    os.rename(srcName,dstName)
 
-show_id3_tags(testfile)
+
+targetDir = 'test/'
+targetFile = 'JUNK伊集院光・深夜の馬鹿力2018年03月26日.mp3'
+
+os.chdir(targetDir)
+if os.path.exists(targetFile):
+    show_id3_tags(targetFile)
+    rename(targetFile)
+else:
+    print("ファイルが無いよ")
