@@ -21,16 +21,11 @@ def set_id3_tag(srcFile):
     print(tags['date'])
 
 def rename(srcFile):
-    #testfile = open(targetPath + "JUNK伊集院光・深夜の馬鹿力2018年03月19日.mp3")
-    #content = testfile.readlines()
-    #content = testfile.read()
-    time_str = time.strftime('%Y%m%d%H%M%S')
+    #time_str = time.strftime('%Y%m%d%H%M%S')
     #print(time_str)
-    dstName = srcFile.replace('26','26')
-    dstName = 'ちとんテスト.mp3'
+    dstName = srcFile.replace('伊集院光 深夜の馬鹿力 ','JUNK伊集院光・深夜の馬鹿力')
+    dstName = dstName + '.mp3'
     os.rename(srcFile,dstName)
-
-
 
 targetDir = 'test/'
 targetFile = 'ちとんテスト.mp3' #'JUNK伊集院光・深夜の馬鹿力2018年03月26日.mp3'
