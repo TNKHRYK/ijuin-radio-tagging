@@ -3,6 +3,7 @@
 import sys
 import os
 from mutagen.easyid3 import EasyID3
+from mutagen.id3 import ID3
 import time
 
 
@@ -17,24 +18,28 @@ def set_id3_tag(srcFile):
     tags['artist'] = '伊集院 光'
     tags['album'] = '深夜の馬鹿力 '+ time.strftime('%Y') +'年'
     tags['genre'] = 'Radio'
+    #tags['media'] = 'Audio book'
     tags['date'] = time_str
     tags.save()
-    print(tags['date'])
+    #print(tags['date'])
 
 def rename(srcFile):
     #time_str = time.strftime('%Y%m%d%H%M%S')
     #print(time_str)
     dstName = srcFile.replace('伊集院光 深夜の馬鹿力 ','JUNK伊集院光・深夜の馬鹿力')
-    dstName = dstName + '.mp3'
+    dstName = dstName
     os.rename(srcFile,dstName)
 
-targetDir = 'test/'
-targetFile = 'ちとんテスト.mp3' #'JUNK伊集院光・深夜の馬鹿力2018年03月26日.mp3'
+argvs = sys.argv
+print('引数　：　' + argvs[1])
 
-os.chdir(targetDir)
+#targetDir = 'test/'
+targetFile = argvs[1] #'ちとんテスト.mp3' #'JUNK伊集院光・深夜の馬鹿力2018年03月26日.mp3'
+
+#os.chdir(targetDir)
 if os.path.exists(targetFile):
-    showId3Tags(targetFile)
     set_id3_tag(targetFile)
     rename(targetFile)
+    showId3Tags(targetFile)
 else:
     print("ファイルが無いよ")
