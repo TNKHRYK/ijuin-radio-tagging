@@ -19,7 +19,8 @@ def set_id3_tag(srcFile):
     tags['album'] = '深夜の馬鹿力 '+ time.strftime('%Y') +'年'
     tags['genre'] = 'Radio'
     #tags['media'] = 'Audio book'
-    tags['date'] = time_str
+    #tags['date'] = time_str
+    #tags['originaldate'] = time_str
     tags.save()
     #print(tags['date'])
 
@@ -33,8 +34,7 @@ def rename(srcFile):
 argvs = sys.argv
 print('引数　：　' + argvs[1])
 
-#targetDir = 'test/'
-targetFile = argvs[1] #'ちとんテスト.mp3' #'JUNK伊集院光・深夜の馬鹿力2018年03月26日.mp3'
+targetFile = argvs[1]
 
 #os.chdir(targetDir)
 if os.path.exists(targetFile):
