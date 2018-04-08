@@ -32,14 +32,16 @@ def rename(srcFile):
     os.rename(srcFile,dstName)
 
 argvs = sys.argv
-print('引数　：　' + argvs[1])
+
+if len(argvs) != 2:
+    print("MP3ファイルを指定してね")
+    sys.exit()
 
 targetFile = argvs[1]
-
-#os.chdir(targetDir)
 if os.path.exists(targetFile):
     set_id3_tag(targetFile)
     rename(targetFile)
     showId3Tags(targetFile)
 else:
-    print("ファイルが無いよ")
+    print("対象ファイルが無いよ")
+    sys.exit()
