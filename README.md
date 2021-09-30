@@ -3,7 +3,7 @@ Set ID3 tag for 『月曜JUNK深夜の馬鹿力』 MP3
 
 ## Usage
 
-    $ setTag.py [mp3 file path]
+    $ python3 setTag.py [mp3 file path]
 
 ## An error occurred.
     #Permission
