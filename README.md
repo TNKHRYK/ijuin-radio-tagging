@@ -3,9 +3,14 @@ Set ID3 tag for 『月曜JUNK深夜の馬鹿力』 MP3
 
 ## Usage
 
-    $ chmod +x setTag.py
-    $ ./setTag.py [mp3 file path]
+    $ setTag.py [mp3 file path]
 
+## An error occurred.
+    #Permission
+    $ chmod +x setTag.py
+
+    #ModuleNotFoundError: No module named 'mutagen'
+    $ pip3 install mutagen
 
 ## Result
 Key | Value
