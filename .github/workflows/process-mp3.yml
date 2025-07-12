@@ -1,0 +1,55 @@
+name: Process MP3 Files
+
+on:
+  push:
+    paths:
+      - 'audio/**/*.mp3'
+      - 'mp3/**/*.mp3'
+      - '*.mp3'
+  workflow_dispatch:
+
+jobs:
+  process-mp3:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install mutagen
+    
+    - name: Find and process MP3 files
+      run: |
+        # Find all MP3 files that were added/modified in this push
+        git diff --name-only HEAD~1 HEAD | grep -E '\.mp3$' | while read mp3_file; do
+          if [ -f "$mp3_file" ]; then
+            echo "Processing: $mp3_file"
+            python setTag.py "$mp3_file"
+          fi
+        done
+    
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        # Check if there are any changes to commit
+        if git diff --quiet && git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git add .
+          git commit -m "🎵 Auto-process MP3 files with tags and rename - 🤖 Generated with GitHub Actions"
+          git push
+        fi
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
