@@ -24,7 +24,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-*.mp3
+# *.mp3  # Commented out to allow MP3 files for auto-processing
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
